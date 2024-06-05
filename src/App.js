@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [message, setMessage] = useState('');
+  const [ram, setRam] = useState('');
+  const [storage, setStorage] = useState('');
+  const [brandRating, setBrandRating] = useState('');
 
-  useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/hello')
-      .then(response => {
-        setMessage(response.data.message);
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      });
-  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add form submission logic here
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>{message}</h1>
-      </header>
+      <div className="App-content">
+        <h1>Estimate the Price of the Machine</h1>
+        <form className="App-form" onSubmit={handleSubmit}>
+          
+          <div className="button-group">
+            <button type="submit" className="estimate-button">Estimate Laptop Price</button>
+            <button type="submit" className="estimate-button">Estimate PC Price</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
