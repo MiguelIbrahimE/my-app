@@ -1,29 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import Laptop from './Laptop';
+import PC from './PC';
 
 function App() {
-  const [ram, setRam] = useState('');
-  const [storage, setStorage] = useState('');
-  const [brandRating, setBrandRating] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add form submission logic here
-  };
-
   return (
-    <div className="App">
-      <div className="App-content">
-        <h1>Estimate the Price of the Machine</h1>
-        <form className="App-form" onSubmit={handleSubmit}>
-          
-          <div className="button-group">
-            <button type="submit" className="estimate-button">Estimate Laptop Price</button>
-            <button type="submit" className="estimate-button">Estimate PC Price</button>
-          </div>
-        </form>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              <div className="App-content">
+                <h1>Estimate the Price of the Machine</h1>
+                <div className="button-group">
+                  <Link to="/laptop">
+                    <button className="estimate-button">Estimate Laptop Price</button>
+                  </Link>
+                  <Link to="/pc">
+                    <button className="estimate-button">Estimate PC Price</button>
+                  </Link>
+                </div>
+              </div>
+            } 
+          />
+          <Route path="/laptop" element={<Laptop />} />
+          <Route path="/pc" element={<PC />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
